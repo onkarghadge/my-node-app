@@ -1,0 +1,150 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: template API
+host: 'localhost:10010'
+basePath: /template
+schemes:
+  - http
+consumes:
+  - multipart/form-data
+  - application/json
+produces:
+  - application/json
+  - text/plain
+paths:
+  /v1/Template:
+    x-swagger-router-controller: controller
+    get:
+      description: Retrieve a list of Template
+      operationId: v1_TemplateList
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number of the request
+        - name: count
+          in: query
+          type: integer
+          description: Number of categories per page
+        - name: filter
+          in: query
+          type: string
+          description: Filter categories based on certain fields
+        - name: select
+          in: query
+          type: string
+          description: Comma seperated fields to be displayed
+        - name: sort
+          in: query
+          type: string
+          description: sort parameter
+      responses:
+        '200':
+          description: List of the entites
+        '400':
+          description: Bad parameters
+        '404':
+          description: No categories to list with the given parameter set.
+        '500':
+          description: Internal server error
+    post:
+      description: Create a new Template
+      operationId: v1_TemplateCreate
+      parameters:
+        - name: data
+          in: body
+          description: Payload to create a Template
+          schema:
+            $ref: '#/definitions/Template_create'
+      responses:
+        '200':
+          description: List of the entites
+        '400':
+          description: Bad parameters
+        '404':
+          description: No categories to list with the given parameter set.
+        '500':
+          description: Internal server error
+  '/v1/Template/{id}':
+    x-swagger-router-controller: controller
+    get:
+      description: Retrieve a list of Template
+      operationId: v1_TemplateShow
+      parameters:
+        - name: filter
+          in: query
+          type: string
+          description: Filter categories based on certain fields
+        - name: select
+          in: query
+          type: string
+          description: Comma seperated fields to be displayed
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Id of the object to be updated
+      responses:
+        '200':
+          description: List of the entites
+        '400':
+          description: Bad parameters
+        '404':
+          description: No categories to list with the given parameter set.
+        '500':
+          description: Internal server error
+    put:
+      description: Create a new Template
+      operationId: v1_TemplateUpdate
+      parameters:
+        - name: data
+          in: body
+          description: Payload to update a Template
+          schema:
+            $ref: '#/definitions/Template_create'
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Id of the Template to be updated
+      responses:
+        '200':
+          description: List of the entites
+        '400':
+          description: Bad parameters
+        '404':
+          description: No categories to list with the given parameter set.
+        '500':
+          description: Internal server error
+    delete:
+      description: Create a new Template
+      operationId: v1_TemplateDestroy
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Id of the Template to be updated
+      responses:
+        '200':
+          description: List of the entites
+        '400':
+          description: Bad parameters
+        '404':
+          description: No categories to list with the given parameter set.
+        '500':
+          description: Internal server error
+definitions:
+  Template_create:
+    properties:
+      _id:
+        type: string
+      category:
+        type: string
+      subCategory:
+        type: string
+      templateName:
+        type: string
+      template:
+        type: string
